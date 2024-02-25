@@ -4,7 +4,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="LearnStyle.css">
   <title>Flashcards</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
@@ -124,7 +123,7 @@
     }
 
     .fa-minus:hover {
-      color: red;
+      color: #635dff;
     }
 
     a {
@@ -349,17 +348,23 @@
       const question = document.createElement('h2');
       const answer = document.createElement('h2');
       const del = document.createElement('i');
+
       flashcard.className = 'flashcard';
       question.setAttribute("style", "border-top:1px solid red; padding: 15px; margin-top:30px");
       question.textContent = text.my_question;
       answer.setAttribute("style", "text-align:center; display:none; color:red");
       answer.textContent = text.my_answer;
       del.className = "fas fa-minus";
+      del.style.position = "absolute";
+      del.style.top = "5px";
+      del.style.right = "5px";
       del.addEventListener("click", () => {
         contentArray.splice(delThisIndex, 1);
         localStorage.setItem('items', JSON.stringify(contentArray));
-        window.location.reload();
-      })
+        flashcard.remove();
+        //window.location.reload();
+      });
+
       flashcard.appendChild(question);
       flashcard.appendChild(answer);
       flashcard.appendChild(del);
@@ -368,7 +373,7 @@
           answer.style.display = "block";
         else
           answer.style.display = "none";
-      })
+      });
       document.querySelector("#flashcards").appendChild(flashcard);
     }
     contentArray.forEach(flashcardMaker);
