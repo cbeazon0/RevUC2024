@@ -1,29 +1,34 @@
-import socket
+import socketio
 import threading
 
-def receive_messages(client_socket):
+def receive_messages():
     while True:
-        try:
-            message = client_socket.recv(1024).decode("utf-8")
-            print(message)
-        except ConnectionResetError:
-            print("[ERROR] Connection with the server has been reset.")
+        message = input()  # Assuming you want to input messages from the terminal
+        if message.lower() == 'exit':
+            sio.disconnect()
             break
+        sio.emit('message', message)
 
-HOST = '172.16.3.53'
-PORT = 55555
+sio = socketio.Client()
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client_socket.connect((HOST, PORT))
+@sio.event
+def connect():
+    print("[CONNECTED] You are now connected to the chatroom.")
 
-print("[CONNECTED] You are now connected to the chatroom.")
+@sio.event
+def message(data):
+    print(data)
 
-receive_thread = threading.Thread(target=receive_messages, args=(client_socket,))
+HOST = 'http://172.16.3.53:5000'
+
+sio.connect(HOST)
+
+receive_thread = threading.Thread(target=receive_messages)
 receive_thread.start()
 
 while True:
     message = input()
     if message.lower() == 'exit':
-        client_socket.close()
+        sio.disconnect()
         break
-    client_socket.send(message.encode("utf-8"))
+    sio.emit('message', message)

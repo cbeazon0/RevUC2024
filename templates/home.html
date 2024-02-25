@@ -1,16 +1,204 @@
+<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Auth0 Example</title>
-  </head>
-  <body>
+<head>
+    <title>Chat Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111111;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            position: relative; /* Added for positioning the buttons */
+        }
+
+        h1 {
+            color: #dddddd;
+        }
+
+        p {
+            color: #666;
+        }
+
+        a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #635dff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Added styles for the menu button */
+        .menu-button {
+            position: absolute;
+            top: 20px;
+            left: 10px;
+            padding: 5px 10px;
+            background-color: #635dff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Added styles for the profile button */
+        .profile-button {
+            position: absolute;
+            top: 20px;
+            right: 10px;
+            padding: 5px 10px;
+            background-color: #635dff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Added styles for the profile menu */
+        .profile-menu {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: #444;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        /* Style for profile menu items */
+        .profile-menu a {
+            display: block;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+        /* Added styles for the menu menu */
+        .menu-menu {
+            position: fixed;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            background-color: #444;
+            padding: 20px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        /* Style for menu menu items */
+        .menu-menu a {
+            display: block;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        /* Style for the login button */
+        .large-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #635dff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 20px;
+            margin-top: 20px;
+        }
+
+        /* Center the login button */
+        .login-button-container {
+            text-align: center;
+        }
+
+        /* Styles for the button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Set height to full viewport height */
+            margin-top: 20px; /* Adjust top margin as needed */
+        }
+
+        /* Styles for the page buttons */
+        .page-button {
+            text-align: center;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        /* Styles for button images */
+        .button-image {
+            display: block;
+            width: 150px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin: 0 auto 10px; /* Center the image */
+        }
+
+        /* Styles for button text */
+        .button-text {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Added profile button -->
+    <a href="#" class="profile-button" id="profileButton">
+        <img src="/static/images/ProfilePic.png" alt="Profile Picture" style="width:42px;height:42px;">
+    </a>
+
+    <!-- Profile menu -->
+    <div class="profile-menu" id="profileMenu">
+        {% if session %}
+        <a href="/logout">Logout</a>
+        {% else %}
+        <a href="/login">Login/Signup</a>
+        {% endif %}
+    </div>
+
     {% if session %}
+        <!-- Added menu button -->
+        <a href="#" class="menu-button" id="menuButton">Menu</a>
+        <!-- Menu menu -->
+        <div class="menu-menu" id="menuMenu">
+            <a href="/">Home</a>
+            <a href="/game">Play</a>
+            <a href="/learn">Learn</a>
+            <a href="/chat">Chat</a>
+        </div>
         <h1>Welcome {{session.userinfo.name}}!</h1>
-        <p><a href="/logout">Logout</a></p>
-        <div><pre>{{pretty}}</pre></div>
+        <div class="button-container">
+            <a href="/game" class="page-button">
+                <img src="/static/images/game.png" alt="Game Image" class="button-image">
+                <span class="button-text">Play Game</span>
+            </a>
+            <a href="/learn" class="page-button">
+                <img src="/static/images/learn.png" alt="Learning Image" class="button-image">
+                <span class="button-text">Learn</span>
+            </a>
+            <a href="/chat" class="page-button">
+                <img src="/static/images/chat.png" alt="Chat Image" class="button-image">
+                <span class="button-text">Chat</span>
+            </a>
+        </div>
     {% else %}
         <h1>Welcome Guest</h1>
-        <p><a href="/login">Login</a></p>
+        <div class = "login-button-container">
+            <a href = "/login" class = "large-button">Login</a>
+        </div>
     {% endif %}
-  </body>
+
+    <script type = text/javascript>
+        // JavaScript to toggle the profile menu
+        document.getElementById('profileButton').addEventListener('click', function() {
+            var profileMenu = document.getElementById('profileMenu');
+            profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+        });
+        document.getElementById('menuButton').addEventListener('click', function() {
+            var menuMenu = document.getElementById('menuMenu');
+            menuMenu.style.display = menuMenu.style.display === 'block' ? 'none' : 'block';
+        });
+    </script>
+</body>
 </html>

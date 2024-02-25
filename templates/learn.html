@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Chat Page</title>
     <style>
@@ -9,7 +10,8 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            position: relative; /* Added for positioning the buttons */
+            position: relative;
+            /* Added for positioning the buttons */
         }
 
         h1 {
@@ -76,6 +78,7 @@
             color: #fff;
             margin-bottom: 10px;
         }
+
         /* Added styles for the menu menu */
         .menu-menu {
             position: fixed;
@@ -111,8 +114,38 @@
         .login-button-container {
             text-align: center;
         }
+
+        /* Styles for the button container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Set height to full viewport height */
+            margin-top: 20px; /* Adjust top margin as needed */
+        }
+
+        /* Styles for the page buttons */
+        .page-button {
+            text-align: center;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        /* Styles for button images */
+        .button-image {
+            display: block;
+            width: 150px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+            margin: 0 auto 10px; /* Center the image */
+        }
+
+        /* Styles for button text */
+        .button-text {
+            color: #fff;
+        }
     </style>
 </head>
+
 <body>
     <!-- Added menu button -->
     <a href="#" class="menu-button" id="menuButton">Menu</a>
@@ -124,9 +157,9 @@
     <!-- Profile menu -->
     <div class="profile-menu" id="profileMenu">
         {% if session %}
-            <a href="/logout">Logout</a>
+        <a href="/logout">Logout</a>
         {% else %}
-            <a href="/login">Login/Signup</a>
+        <a href="/login">Login/Signup</a>
         {% endif %}
     </div>
 
@@ -137,12 +170,7 @@
         <a href="/learn">Learn</a>
         <a href="/chat">Chat</a>
     </div>
-
-    <h1>Welcome to the Game Page!</h1>
-
-    <canvas id = "gameCanvas" width = "600", height = "400"></canvas>
-
-<!--
+    <!--
     {% if session %}
         <h1>Welcome {{session.userinfo.name}}!</h1>
     {% else %}
@@ -152,7 +180,18 @@
         </div>
     {% endif %}
 -->
-    <script type = text/javascript>
+
+    <div class="button-container">
+        <a href="/flashcards" class="page-button">
+            <img src="/static/images/learn.png" alt="Flashcards Image" class="button-image">
+            <span class="button-text">Flashcards</span>
+        </a>
+        <a href="/quiz" class="page-button">
+            <img src="/static/images/learn.png" alt="Quiz Image" class="button-image">
+            <span class="button-text">Quiz</span>
+        </a>
+
+        <script type=text/javascript>
         // JavaScript to toggle the profile menu
         document.getElementById('profileButton').addEventListener('click', function() {
             var profileMenu = document.getElementById('profileMenu');
@@ -162,22 +201,7 @@
             var menuMenu = document.getElementById('menuMenu');
             menuMenu.style.display = menuMenu.style.display === 'block' ? 'none' : 'block';
         });
-        // Game code
-        // Get the canvas element
-        var canvas = document.getElementById('gameCanvas');
-        var ctx = canvas.getContext('2d');
-
-        // Function to draw the game image onto the canvas
-        function drawGame(imageData) {
-            var img = new Image();
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = 'data:image/png;base64,' + imageData;
-        }
-
-        // Call the drawGame function with the game image data
-        drawGame('{{ game_image }}');
     </script>
 </body>
+
 </html>
