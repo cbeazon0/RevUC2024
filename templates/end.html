@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz App</title>
+    <title>Congrats!</title>
     <style>
         :root {
             background-color: #111111;
@@ -140,11 +140,65 @@
 
 <body>
     <div class="container">
-        <div id="home" class="flex-center flex-column">
-            <h1>Quick Quiz</h1>
-            <a class="btn" href="./questions">Play</a>
-            <a class="btn" href="./highscores">High Scores</a>
+        <div id="end" class="flex-center flex-column">
+            <h1 id="finalScore"></h1> <!--0 par default-->
+            <form>
+                <input type="text" name="username" id="username" placeholder="username" />
+                <button type="submit" class="btn" id="saveScoreBtn" onclick="saveHighScore(event)" disabled />
+                Save
+                </button>
+            </form>
+            <a class="btn" href="questions">Play Again</a>
+            <a class="btn" href="index">Go Home</a>
         </div>
     </div>
+    <script>
+
+        const username = document.getElementById("username");
+        const saveScoreBtn = document.getElementById("saveScoreBtn");
+        const finalScore = document.getElementById('finalScore');
+        const mostRecentScore = localStorage.getItem('mostRecentScore');
+
+
+        const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+        const MAX_HIGH_SCORES = 5;
+
+        //console.log(highScores);
+
+        finalScore.innerText = mostRecentScore;
+
+        username.addEventListener("keyup", () => {
+            saveScoreBtn.disabled = !username.value;
+        });
+
+        saveHighScore = e => {
+            console.log('clicked the save button!');
+            e.preventDefault();
+
+            const score = {
+                score: Math.floor(Math.random() * 100),
+                name: username.value
+            };
+            //push thisnew score:
+            highScores.push(score);
+
+            highScores.sort((a, b) => b.score = a.score);
+
+            /*<==> 
+            highScores.sort( (a,b) =>{
+                return b.score = a.score;
+            });
+            */
+            highScores.splice(5);
+
+            localStorage.setItem("highScores", JSON.stringify(highScores));
+
+            window.location.assign("/");
+
+            //console.log(highScores);
+        };
+    </script>
 </body>
+
 </html>

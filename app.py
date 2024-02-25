@@ -82,10 +82,20 @@ def flashcards():
 def quiz():
     return render_template("quiz.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
 
-# Go to results page
-@app.route("/results")
-def results():
-    return render_template("results.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
+# Go to questions page
+@app.route("/questions")
+def questions():
+    return render_template("questions.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
+
+# Go to end page
+@app.route("/end")
+def end():
+    return render_template("end.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
+
+# Go to highscores page
+@app.route("/highscores")
+def highscores():
+    return render_template("highscores.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
 
 # Go to game page
 @app.route("/game")
