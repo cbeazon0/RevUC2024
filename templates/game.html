@@ -138,10 +138,7 @@
         <a href="/chat">Chat</a>
     </div>
 
-    <h1>Welcome to the Game Page!</h1>
-
-    <canvas id = "gameCanvas" width = "600", height = "400"></canvas>
-
+    <h1>Welcome to the Flashcards Page!</h1>
 <!--
     {% if session %}
         <h1>Welcome {{session.userinfo.name}}!</h1>
@@ -162,22 +159,6 @@
             var menuMenu = document.getElementById('menuMenu');
             menuMenu.style.display = menuMenu.style.display === 'block' ? 'none' : 'block';
         });
-        // Game code
-        // Get the canvas element
-        var canvas = document.getElementById('gameCanvas');
-        var ctx = canvas.getContext('2d');
-
-        // Function to draw the game image onto the canvas
-        function drawGame(imageData) {
-            var img = new Image();
-            img.onload = function() {
-                ctx.drawImage(img, 0, 0);
-            };
-            img.src = 'data:image/png;base64,' + imageData;
-        }
-
-        // Call the drawGame function with the game image data
-        drawGame('{{ game_image }}');
     </script>
 </body>
 </html>

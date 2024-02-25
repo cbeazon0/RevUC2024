@@ -6,7 +6,7 @@ from markupsafe import Markup
 
 from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
-from flask import Flask, redirect, render_template, session, url_for
+from flask import Flask, redirect, render_template, session, url_for, request
 from flask_socketio import SocketIO, send
 
 # Load environment variables from .env file
@@ -71,6 +71,21 @@ def logout():
 @app.route("/learn")
 def learn():
     return render_template("learn.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
+
+# Go to flashcards page
+@app.route("/flashcards")
+def flashcards():
+    return render_template("flashcards.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
+
+# Go to quiz page
+@app.route("/quiz")
+def quiz():
+    return render_template("quiz.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
+
+# Go to results page
+@app.route("/results")
+def results():
+    return render_template("results.html", session = session.get("user"), pretty = json.dumps(session.get("user"), indent = 4))
 
 # Go to game page
 @app.route("/game")

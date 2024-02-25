@@ -1,134 +1,400 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+<!DOCTYPE html>
+<html lang="en">
 
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="LearnStyle.css">
+  <title>Flashcards</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
-body{
-  font-family: Arial, sans-serif;
-  font-size: 1rem;
-  color: #444444;
-  background: #111111;
-}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-button{
-  padding: 8px;
-  outline: none;
-  cursor: pointer;
-  border: 1px solid lightgray;
-  border-radius: 5px;
-  background: #635dff;
-}
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111111;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      position: relative;
+      /* Added for positioning the buttons */
+    }
 
-button:hover{
-  background-color: #0056b3;
-}
+    button {
+      padding: 8px;
+      outline: none;
+      cursor: pointer;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      background: #635dff;
+    }
 
-.container{
-  width: 1280px;
-  margin: auto;
-}
+    button:hover {
+      background-color: #0056b3;
+    }
 
-header{background-color: #fff;}
+    .container {
+      width: 1920px;
+      margin: auto;
+    }
 
-#header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  min-height: 70px;
-  padding: 0 20px;
-  background: #444444;
-  color: #ffffff;
-}
+    header {
+      background-color: #fff;
+    }
 
-#header button{
-  font-family: inherit;
-  border: 1px black;
-}
+    #header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 70px;
+      padding: 0 20px;
+      background: #444444;
+      color: #ffffff;
+    }
 
-#create_card{
-  display: none;
-  width: 370px;
-  margin:auto;
-  padding: 20px;
-  margin-top: 10px;
-  background: whitesmoke;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
-}
+    #header button {
+      font-family: inherit;
+      border: 1px black;
+    }
 
-#create_card h2{
-  color: black;
-  text-align: center;
-}
+    #create_card {
+      display: none;
+      width: 370px;
+      margin: auto;
+      padding: 20px;
+      margin-top: 10px;
+      background: whitesmoke;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
+    }
 
-#create_card textarea{
-  width: 100%;
-  border-radius: 5px;
-  font-family: inherit;
-  border: 1px solid lightgray;
-  resize: none;
-}
+    #create_card h2 {
+      color: black;
+      text-align: center;
+    }
 
-#create_card button{width: fit-content;}
+    #create_card textarea {
+      width: 100%;
+      border-radius: 5px;
+      font-family: inherit;
+      border: 1px solid lightgray;
+      resize: none;
+    }
 
-#flashcards{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  margin: auto;
-  margin-top: 10px;
-  padding: 0px 10px;
-}
+    #create_card button {
+      width: fit-content;
+    }
 
-.flashcard{
-  width: 370px;
-  height: 200px;
-  word-wrap: break-word;
-  margin: 10px; 
-  background:#fff;
-  cursor: pointer;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
-  position: relative;
-}
+    #flashcards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+      margin: auto;
+      margin-top: 10px;
+      padding: 0px 10px;
+    }
 
-.flashcard h2{font-size: 1rem;}
+    .flashcard {
+      width: 370px;
+      height: 200px;
+      word-wrap: break-word;
+      margin: 10px;
+      background: #fff;
+      cursor: pointer;
+      box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.9);
+      position: relative;
+    }
 
-.fa-minus{
-  top: 3%;
-  right: 2%;
-  position: absolute;
-  color: #1a1a1a;
-  transition: 0.3s ease-out;
-}
+    .flashcard h2 {
+      font-size: 1rem;
+    }
 
-.fa-minus:hover{color: red;}
+    .fa-minus {
+      top: 3%;
+      right: 2%;
+      position: absolute;
+      color: #1a1a1a;
+      transition: 0.3s ease-out;
+    }
 
-@media(max-width:1280px){
-  .container{width: 100%;}
-}
+    .fa-minus:hover {
+      color: red;
+    }
 
-@media(max-width:768px){
-  .flashcard{margin: auto;}
+    a {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #635dff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+      margin-top: 20px;
+    }
 
-  .flashcard{
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-}
+    a:hover {
+      background-color: #0056b3;
+    }
 
-@media(max-width:480px){
-  #header{
-    padding: 20px;
-    gap: 10px;
-    flex-direction: column;
-    align-items: center;
-  }
+    /* Added styles for the menu button */
+    .menu-button {
+      position: absolute;
+      top: 60px;
+      left: 10px;
+      padding: 5px 10px;
+      background-color: #635dff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
 
-  #create_card{width: 95%;}
+    /* Added styles for the profile button */
+    .profile-button {
+      position: absolute;
+      top: 60px;
+      right: 10px;
+      padding: 5px 10px;
+      background-color: #635dff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 5px;
+    }
 
-  .flashcard{width: 100%;}
-}
+    /* Added styles for the profile menu */
+    .profile-menu {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background-color: #444;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    /* Style for profile menu items */
+    .profile-menu a {
+      display: block;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    /* Added styles for the menu menu */
+    .menu-menu {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      background-color: #444;
+      padding: 20px;
+      border-radius: 5px;
+      display: none;
+    }
+
+    /* Style for menu menu items */
+    .menu-menu a {
+      display: block;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    @media(max-width:1920px) {
+      .container {
+        width: 100%;
+      }
+    }
+
+    @media(max-width:768px) {
+      .flashcard {
+        margin: auto;
+      }
+
+      .flashcard {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+    }
+
+    @media(max-width:480px) {
+      #header {
+        padding: 20px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #create_card {
+        width: 95%;
+      }
+
+      .flashcard {
+        width: 100%;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Added profile button -->
+  <a href="#" class="profile-button" id="profileButton">
+    <img src="/static/images/ProfilePic.png" alt="Profile Picture" style="width:42px;height:42px;">
+  </a>
+
+  <!-- Profile menu -->
+  <div class="profile-menu" id="profileMenu">
+    {% if session %}
+    <a href="/logout">Logout</a>
+    {% else %}
+    <a href="/login">Login/Signup</a>
+    {% endif %}
+  </div>
+
+  <!-- Added menu button -->
+  <a href="#" class="menu-button" id="menuButton">Menu</a>
+  <!-- Menu menu -->
+  <div class="menu-menu" id="menuMenu">
+    <a href="/">Home</a>
+    <a href="/game">Play</a>
+    <a href="/learn">Learn</a>
+    <a href="/chat">Chat</a>
+  </div>
+  <main>
+    <header>
+      <div class="container">
+        <div id="header">
+          <h1>Learn with Flashcards!</h1>
+          <div>
+            <button id="show_card_box">Add Card</button>
+            <button id="delete_cards">Del Cards</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <section>
+      <div class="container">
+        <div id="create_card">
+          <h2>Create Flashcard</h2>
+          <label for="question">Question</label>
+          <textarea id="question" maxlength="280"></textarea>
+          <label for="answer" maxlength="280">Answer</label>
+          <br>
+          <textarea id="answer"></textarea>
+          <div>
+            <button id="save_card">Save</button> <button id="close_card_box">Close</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div id="flashcards"></div>
+      </div>
+    </section>
+  </main>
+  <script>
+    var contentArray = localStorage.getItem('items') ? JSON.parse(localStorage.getItem('items')) : [];
+
+    var defaultCards = [
+      {
+        "my_question": "Hallo",
+        "my_answer": "Hello"
+      },
+      {
+        "my_question": "Guten Morgen",
+        "my_answer": "Good Morning"
+      },
+      {
+        "my_question": "Guten Tag",
+        "my_answer": "Good Afternoon"
+      },
+      {
+        "my_question": "Wie geht's?",
+        "my_answer": "How are you?"
+      },
+      {
+        "my_question": "Deutschland",
+        "my_answer": "Germany"
+      },
+      {
+        "my_question": "Ich versteche nicht",
+        "my_answer": "I don't understand"
+      }
+    ];
+    if(contentArray.length == 0){
+      contentArray = defaultCards;
+      localStorage.setItem('items', JSON.stringify(contentArray));
+    }
+    document.getElementById("save_card").addEventListener("click", () => {
+      addFlashcard();
+    });
+    document.getElementById("delete_cards").addEventListener("click", () => {
+      localStorage.clear();
+      flashcards.innerHTML = '';
+      contentArray = [];
+    });
+    document.getElementById("show_card_box").addEventListener("click", () => {
+      document.getElementById("create_card").style.display = "block";
+    });
+    document.getElementById("close_card_box").addEventListener("click", () => {
+      document.getElementById("create_card").style.display = "none";
+    });
+    flashcardMaker = (text, delThisIndex) => {
+      const flashcard = document.createElement("div");
+      const question = document.createElement('h2');
+      const answer = document.createElement('h2');
+      const del = document.createElement('i');
+      flashcard.className = 'flashcard';
+      question.setAttribute("style", "border-top:1px solid red; padding: 15px; margin-top:30px");
+      question.textContent = text.my_question;
+      answer.setAttribute("style", "text-align:center; display:none; color:red");
+      answer.textContent = text.my_answer;
+      del.className = "fas fa-minus";
+      del.addEventListener("click", () => {
+        contentArray.splice(delThisIndex, 1);
+        localStorage.setItem('items', JSON.stringify(contentArray));
+        window.location.reload();
+      })
+      flashcard.appendChild(question);
+      flashcard.appendChild(answer);
+      flashcard.appendChild(del);
+      flashcard.addEventListener("click", () => {
+        if (answer.style.display == "none")
+          answer.style.display = "block";
+        else
+          answer.style.display = "none";
+      })
+      document.querySelector("#flashcards").appendChild(flashcard);
+    }
+    contentArray.forEach(flashcardMaker);
+    addFlashcard = () => {
+      const question = document.querySelector("#question");
+      const answer = document.querySelector("#answer");
+      let flashcard_info = {
+        'my_question': question.value,
+        'my_answer': answer.value
+      }
+      contentArray.push(flashcard_info);
+      localStorage.setItem('items', JSON.stringify(contentArray));
+      flashcardMaker(contentArray[contentArray.length - 1], contentArray.length - 1);
+      question.value = "";
+      answer.value = "";
+    }
+    // JavaScript to toggle the profile menu
+    document.getElementById('profileButton').addEventListener('click', function () {
+      var profileMenu = document.getElementById('profileMenu');
+      profileMenu.style.display = profileMenu.style.display === 'block' ? 'none' : 'block';
+    });
+    document.getElementById('menuButton').addEventListener('click', function () {
+      var menuMenu = document.getElementById('menuMenu');
+      menuMenu.style.display = menuMenu.style.display === 'block' ? 'none' : 'block';
+    });
+  </script>
+</body>
+
+</html>
